@@ -160,8 +160,6 @@ function handleCreateRoom(event) {
         }],
         previews: [],
         status: 'waiting',
-        previewResults: {},
-        currentPreview: null,
         challengeTimers: {}
     };
 
@@ -179,6 +177,9 @@ function handleJoinRoom(event) {
     const roomName = document.getElementById('joinRoomName').value;
     const password = document.getElementById('joinRoomPassword').value;
     const playerName = document.getElementById('playerName').value;
+
+    console.log('Attempting to join room:', roomName, 'with password:', password);
+    console.log('Current rooms:', gameState.rooms);
 
     const room = gameState.rooms.find(r => r.name === roomName && r.password === password);
 
