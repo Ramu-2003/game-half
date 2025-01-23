@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBattle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Home Screen -->
+    <div id="homeScreen" class="screen">
+        <div class="container">
+            <h1>Welcome to CodeBattle</h1>
+            <p>Create or join a room to start competing!</p>
+            <div class="button-group">
+                <button onclick="showScreen('createRoom')" class="btn primary">
+                    <i data-feather="users"></i>
+                    Create Room
+                </button>
+                <button onclick="showScreen('joinRoom')" class="btn secondary">
+                    <i data-feather="log-in"></i>
+                    Join Room
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Room Screen -->
+    <div id="createRoom" class="screen hidden">
+        <div class="container">
+            <h2>Create a Game Room</h2>
+            <form id="createRoomForm" onsubmit="handleCreateRoom(event)">
+                <div class="form-group">
+                    <label for="roomName">Room Name</label>
+                    <input type="text" id="roomName" required>
+                </div>
+                <div class="form-group">
+                    <label for="adminName">Your Name (Admin)</label>
+                    <input type="text" id="adminName" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomPassword">Room Password</label>
+                    <input type="password" id="roomPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="gameMode">Game Mode</label>
+                    <select id="gameMode" required>
+                        <option value="2-player">2 Players</option>
+                        <option value="3-player">3 Players</option>
+                        <option value="4-player">4 Players</option>
+                        <option value="5-player">5 Players</option>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button type="button" onclick="showScreen('homeScreen')" class="btn secondary">Back</button>
+                    <button type="submit" class="btn primary">Create Room</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Join Room Screen -->
+    <div id="joinRoom" class="screen hidden">
+        <div class="container">
+            <h2>Join a Game Room</h2>
+            <form id="joinRoomForm" onsubmit="handleJoinRoom(event)">
+                <div class="form-group">
+                    <label for="joinRoomName">Room Name</label>
+                    <input type="text" id="joinRoomName" required>
+                </div>
+                <div class="form-group">
+                    <label for="playerName">Your Name</label>
+                    <input type="text" id="playerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="joinRoomPassword">Room Password</label>
+                    <input type="password" id="joinRoomPassword" required>
+                </div>
+                <div class="button-group">
+                    <button type="button" onclick="showScreen('homeScreen')" class="btn secondary">Back</button>
+                    <button type="submit" class="btn primary">Join Room</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Game Room Screen -->
+    <div id="gameRoom" class="screen hidden">
+        <div class="container">
+            <div class="room-header">
+                <h2 id="roomTitle">Room: </h2>
+                <div class="game-info">
+                    <div id="timerDisplay" class="timer hidden">Time: 0:00</div>
+                    <div class="player-count">
+                        <i data-feather="users"></i>
+                        <span id="playerCount">0/2 players</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-content">
+                <div class="players-list">
+                    <h3>Players</h3>
+                    <div id="playersList" class="players-container"></div>
+                </div>
+
+                <div class="game-area">
+                    <div id="adminControls" class="admin-controls hidden">
+                        <button onclick="addPreview()" class="btn primary">Add Preview Challenge</button>
+                        <button id="startGameBtn" onclick="startGame()" class="btn success" disabled>
+                            <i data-feather="play"></i>
+                            Start Game
+                        </button>
+                    </div>
+
+                    <div id="previewsList" class="previews-list"></div>
+                    
+                    <div id="challengeArea" class="challenge-area hidden">
+                        <h3 id="challengeTitle"></h3>
+                        <p id="challengeDescription"></p>
+                        <div class="expected-output">
+                            <p>Expected Output:</p>
+                            <code id="expectedOutput"></code>
+                        </div>
+                        <textarea id="solution" placeholder="Write your solution here..."></textarea>
+                        <div id="liveOutput" class="live-output"></div>
+                        <button onclick="submitSolution()" class="btn success">Submit Solution</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="script.js"></script>
+</body>
+</html>
